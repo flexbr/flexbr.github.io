@@ -1,5 +1,5 @@
 ---
 layout: default
 ---
-# {{site.title}}
-{{site.description}}
+# Home
+Página inicial
