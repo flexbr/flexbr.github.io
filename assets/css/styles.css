@@ -110,6 +110,10 @@ header {
   -webkit-font-smoothing:subpixel-antialiased;
 }
 
+header p {
+  margin:0;
+}
+
 header ul {
   list-style:none;
   height:40px;
