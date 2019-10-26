@@ -1,7 +1,8 @@
 theme: jekyll-theme-minimal
 title: FlexBr.com
+subtitle: Olá, eu sou Ricardo Ramires.
 logo: https://avatars0.githubusercontent.com/u/14129483?s=270&v=4
-description: Olá, eu sou Ricardo Ramires.<br/> Bem vindo ao meu site pessoal!
+description: Bem vindo ao meu site pessoal!
 show_downloads: false
 navigation:
   - title: Home
