@@ -9,6 +9,6 @@ navigation:
   - title: Home
     url: /
   - title: Artigos
-    url: /articles
+    url: /articles/
   - title: Contatos
     url: contacts
