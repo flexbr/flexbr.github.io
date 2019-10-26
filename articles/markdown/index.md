@@ -1,7 +1,8 @@
 # Markdown
 
-**Markdown** é uma linguagem simples de marcação originalmente criada por [John Gruber](daringfireball.net/projects/markdown). 
-Ela converte texto em HTML válido. É a linguagem oficial de documentação no [GitHub](guides.github.com/features/mastering-markdown). Toda a documentação da [Microsoft](docs.microsoft.com) é escrita nela. Como acabou tornando-se um padrão de documentação é importante para todo desenvolvedor conhecê-la e saber utilizá-la.
+**Markdown** é uma linguagem simples de marcação originalmente criada por [John Gruber](https://daringfireball.net/projects/markdown/). Ela converte texto em HTML válido.  
+É a linguagem oficial de documentação no [GitHub](https://guides.github.com/features/mastering-markdown/). Toda a documentação da [Microsoft](https://docs.microsoft.com/) é escrita nela. É bem mais simples usá-la em artigos e documentação do que o html pelo fato de não precisarmos ficar fechando tags.  
+Como acabou tornando-se um padrão de documentação é importante para todo desenvolvedor conhecê-la e saber utilizá-la.
 
 ---
 
