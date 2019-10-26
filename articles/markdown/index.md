@@ -6,7 +6,7 @@ Como acabou tornando-se um padrão de documentação é importante para todo des
 
 ---
 
-## Pricipais Marcadores
+## Principais Marcadores
 
 ### 1 - Cabeçalhos (equivalente a h1-h6 do html):
 # Titulo 1
