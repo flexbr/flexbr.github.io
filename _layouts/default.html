@@ -29,6 +29,10 @@
             {% endif %}
           {% endfor %}
         </table>
+        
+        {% if site.github.is_user_page %}
+          <p class="view"><a href="{{ site.github.owner_url }}">Visite meu perfil no GitHub</a></p>
+        {% endif %}
 
         {% if site.show_downloads %}
           <ul>
