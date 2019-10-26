@@ -1,5 +1,5 @@
 ---
-layout: full
+layout: default
 ---
 # {{site.title}}
 {{site.description}}
