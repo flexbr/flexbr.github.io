@@ -8,9 +8,9 @@ Caso encontre algum erro, seja por descuido ou mudança de versão, por favor n�
 
 ### Clique no artigo desejado:
 
-#### [Markdown](/markdown/)
+#### [Markdown](./markdown/)
 > Resumo dos principais recursos para utilizar Markdown.  
-Uma das melhores e mais simples formas de escrever desde anotações, artigos, esse próprio site, até documentações inteiras. GitHub, Microsoft, e outros grandes utilizam Markdown como padrão de documentação.  
+Uma das melhores e mais simples formas de escrever desde anotações, artigos, esse próprio site e até documentações inteiras. GitHub, Microsoft, e outros grandes utilizam Markdown como padrão de documentação.  
 Então se você não conhece está na hora de aprender.
 
 
