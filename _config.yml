@@ -10,5 +10,5 @@ navigation:
     url: /
   - title: Artigos
     url: /articles
-  - title: Setup
-    url: setup
+  - title: Contatos
+    url: contacts
