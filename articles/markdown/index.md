@@ -50,7 +50,6 @@ __Itálico__
 ___Negrito e Itálico___
 **_Negrito e Itálico_**
 __*Negrito e Itálico*__
-
 ```
 
 ~~Riscado~~, utilizar dois ~(til) antes e depois:

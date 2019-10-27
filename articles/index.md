@@ -8,9 +8,8 @@ Caso encontre algum erro, seja por descuido ou mudança de versão, por favor n�
 ### Clique no artigo desejado:
 
 #### [Markdown](./markdown/)
-> Resumo dos principais recursos para utilizar Markdown.  
-Uma das melhores e mais simples formas de escrever desde anotações que necessitem ser mais elaboradas que somente texto puro, artigos, tutoriais e até documentações inteiras. Esse site estático, por exemplo, é escrito utilizando Markdown.  
-GitHub, Microsoft, e outros grandes utilizam Markdown como padrão de documentação. Então se você não conhece está na hora de aprender.
+> Markdown é uma das melhores e mais simples formas de escrever desde anotações que necessitem ser mais elaboradas que somente texto puro, como artigos, tutoriais e até documentações inteiras. Esse site estático, por exemplo, é escrito utilizando Markdown.  
+GitHub, Microsoft, Bitbucket, Reddit e outros grandes utilizam Markdown como padrão de documentação. Então se você não conhece está na hora de aprender.
 
 
 
