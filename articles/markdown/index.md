@@ -258,38 +258,122 @@ Para usar variáveis para o link e imagem, basta criá-las e substituir onde iri
 [url-google]: http://www.google.com
 [path-da-imagem-google]: img/google.png
 
-[![Logo Google][path-da-imagem-google]][url-google]]
+[![Logo Google][path-da-imagem-google]][url-google]
 
 ```md
 [url-google]: http://www.google.com
 [path-da-imagem-google]: img/google.png
 
-[![Logo Google][path-da-imagem-google]][url-google]]
+[![Logo Google][path-da-imagem-google]][url-google]
 ```
 
+### 9 - Tabelas
+
+Para criar uma tabela, basta usar um `|` pipe entre os valores das colunas e usar na outra linha ` - |` traco pipe para o markdown identificar uma tabela:
+
+Nome | E-mail | Telefone 
+- | - | - 
+Fulano | fula@teste.com | 2222-2222 
+Sicrano | sic@teste.com | 3333-2222 
+Beltrano | bel@teste.com | 98888-7777 
+
+```md
+Nome | E-mail | Telefone 
+- | - | - 
+Fulano | fula@teste.com | 2222-2222 
+Sicrano | sic@teste.com | 3333-2222 
+Beltrano | bel@teste.com | 98888-7777  
+```
+
+Por padrão o alinhamento das células é a esquerda. Para mudar, basta utilizar `:` dois pontos na segunda linha, que é a de controle:
+`:- esquerda, :-: centro e -: direita`
+
+Nome | E-mail | Telefone 
+:- | :-: | -: 
+Fulano | fulano@teste.com | 2222-2222 
+Sicrano | sic@teste.com | 3333-2222 
+Beltrano | belt@teste.com | 98888-7777
+
+```md
+Nome | E-mail | Telefone 
+:- | :-: | -: 
+Fulano | fulano@teste.com | 2222-2222 
+Sicrano | sic@teste.com | 3333-2222 
+Beltrano | belt@teste.com | 98888-7777
+```
+
+### 10 - Blocos de Código
+
+Para criar blocos de código, existem duas formas. Em linha, bastanto usara crase:  
+
+Informe os parâmetros `username` e `password` para a função `login()`.
+
+```md
+Informe os parâmetros `username` e `password` para a função `login()`.
+```
+
+Outra maneira é dar tab, que ele identifica como bloco:
+
+    function login(username, password){
+
+    }
+
+Ficaria assim no texto, identado com o tab:
+
+```md
+    function login(username, password){
+
+    }
+```
+
+E finalmente para blocos de código com **highlighting** use três crases antes, o apelido da linguagem (md = Markdown, js = Javascript, html, etc) e três crases no final:  
+
+```js
+// login method
+function login(username, password){
+    
+}
+```
+
+````md
+```js
+// login method
+function login(username, password){
+
+}
+```
+````
+
+No site da Microsoft tem a lista com os outros apelidos das linguagens:
+
+[Microsoft how-to-write-use-markdown](https://docs.microsoft.com/pt-br/contribute/how-to-write-use-markdown)
 
 
+### 11 - Alguns extras no GitHub
 
+No GitHub é possível utilizar colchetes para fazer 'checks':
 
+![Checkbox no GitHub](img/github_01.png)
 
+```md
+* [x] Item um
+* [ ] Item dois
+* [x] Item três
+```
+Isso é interessante por exemplo para indicar as partes do projeto ou código que foram concluídas.
 
+Também é possivel utilizar Emojis:
 
+![Emojis no GitHub](img/github_02.png)
 
+```md
+:smile: :+1: :shit:
+```
 
+A lista completa de Emojis, você encontra aqui:
 
+[EMOJI CHEAT SHEET](https://www.webfx.com/tools/emoji-cheat-sheet/)
 
+Isso é tudo que eu queria mostrar, pessoal!
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+![Minha Imagem](img/taf.png)
