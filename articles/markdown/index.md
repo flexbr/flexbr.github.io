@@ -9,6 +9,8 @@ Como acabou tornando-se um padrão de documentação é importante para todo des
 ## Principais Marcadores
 
 ### 1 - Cabeçalhos (equivalente a h1-h6 do html):
+Para criar, basta utilizar de uma a seis cerquilha(s) antes do texto
+
 # Titulo 1
 ## Titulo 2
 ### Titulo 3
@@ -26,8 +28,11 @@ Como acabou tornando-se um padrão de documentação é importante para todo des
 ```
 
 ### 2 - Parágrafos
-Basta escrever uma ou mais frases. Para quebrar apenas uma linha, use dois espaços  Agora estamos em uma nova linha. Putz, não deu certo(no preview), mas no gitHub dá. Outra maneira(workaround) é usar a tag br do html.<br>Agora sim, até no preview estamos em outra linha. Para quebrar uma linha com espaçamento maior, dê enter no final.
-Agora estamos em outra linha. (rever essas opções no github).
+Basta escrever uma ou mais frases. Para quebrar apenas uma linha, use dois espaços seguido de enter.  
+Para quebrar uma linha com espaçamento maior, dê dois enter no final pulando uma linha, que será criada outra tag `<p>`.
+
+Agora estamos em outra linha.
+Talvez não de certo(no preview), mas no GitHub dá. Outra maneira(workaround) é usar a tag `<br>` do html.<br>Agora sim, até no preview estamos em outra linha. 
 
 ### 3 - Ênfase 
 
@@ -40,8 +45,8 @@ __Negrito__
 *Itálico* basta colocar um asteriscos ou um _(underline) antes e depois do texto:
 
 ```md
-**Itálico**
-__Itálico__
+*Itálico*
+_Itálico_
 ```
 ***Negrito e Itálico*** ao mesmo tempo, basta utilizar os dois, ou seja três asteriscos, três underline ou mesclar as duas formas:
 
@@ -72,7 +77,7 @@ __*Negrito e Itálico*__
 
 ### 4 - Linhas horizontais
 
-Basta utilizar três *(asteriscos) ou três -(traços), pode também colocar espaços entre eles, e colocar mais asteriscos ou traços, que é ignorado, mas pode facilitar na hora de visualizar somente o código md:
+Basta utilizar três *(asteriscos) ou três -(traços), pode também colocar espaços entre eles, e colocar mais asteriscos ou traços, que é ignorado, mas pode facilitar na hora de visualizar somente o código markdown:
 
 ***
 
@@ -194,39 +199,21 @@ A lista inicia pelo primeiro número informado:
 2. Item 07
 ```
 
-E se eu precisar fazer uma lista com números diferentes? Basta colocar o caracter de escape \(barra invertida) antes do ponto. Mas não será uma lista e você terá que quebrar a linha com dois espaços(  ) no final ou enter para um espaçamento maior:
-
-1990\. Airton Senna  
-2000\. Schumacher  
-2010\. Vettel
-
-```md
-1990\. Airton Senna  
-2000\. Schumacher  
-2010\. Vettel
-
-1990\. Airton Senna
-
-2000\. Schumacher
-
-2010\. Vettel
-```
-
 ### 7 - Links
 
 Para criar um link basta utilizar colchetes em volta do texto, seguido de parênteses contendo o link em sí `[Texto clicável](link)`:
 
-[Vai para o site do Ricardo Ramires](http://rramires.github.io/)
+[Vai para o site do Ricardo Ramires](http://flexbr.com/)
 
 ```md
-[Vai para o site do Ricardo Ramires](http://rramires.github.io/)
+[Vai para o site do Ricardo Ramires](http://flexbr.com/)
 ```
 
 Para utilizar o alt text, basta dar um espaço e colocálo entre aspas:
 
-[Vai para o site do Ricardo Ramires](http://rramires.github.io/ "Clique nesse link para ser redirecionado")
+[Vai para o site do Ricardo Ramires](http://flexbr.com/ "Clique nesse link para ser redirecionado")
 
-Outra forma, é criar uma variável contendo o link e depois acessála:
+Outra forma, é criar uma variável contendo o link e depois acessá-la:
 
 [url-do-google]: http://www.google.com
 [Clique para ir ao Google][url-do-google]
@@ -279,6 +266,7 @@ Para usar variáveis para o link e imagem, basta criá-las e substituir onde iri
 
 [![Logo Google][path-da-imagem-google]][url-google]]
 ```
+
 
 
 
