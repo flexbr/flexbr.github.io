@@ -1,5 +1,4 @@
 ---
 layout: default
 ---
-# Home
-Página inicial
+![Programmer Evolution](/assets/img/prog_ev.jpg)
