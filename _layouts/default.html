@@ -29,10 +29,9 @@
             {% endif %}
           {% endfor %}
         </table>
-        
-        {% if site.github.is_user_page %}
-          <!-- <p class="view"><a href="{{ site.github.owner_url }}">Visite meu perfil no GitHub</a></p> -->
-          <p class="view"><a href="{{ site.github }}rramires">Visite meu perfil no GitHub</a></p>
+
+        {% if site.github.is_project_page %}
+        <p>Visite meu perfil no <a href="{{ site.github.owner_url }}">GitHub</a></p>
         {% endif %}
 
         {% if site.show_downloads %}
@@ -49,9 +48,7 @@
 
       </section>
       <footer>
-        {% if site.github.is_project_page %}
-        <p>This project is maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a></p>
-        {% endif %}
+        
       </footer>
     </div>
     <script src="{{ '/assets/js/scale.fix.js' | relative_url }}"></script>
