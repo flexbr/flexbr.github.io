@@ -1,0 +1,197 @@
+# API Simples com NodeJs e Express
+### Como criar uma API simples em NodeJs com Express 
+
+> O Node.js é uma plataforma que permite que você desenvolva aplicativos de rede escaláveis.  
+ O Express é um framework popular para Node.js que permite criar aplicativos da web com facilidade.   
+ Neste tutorial, mostraremos como criar uma API simples em Node.js com o Express. 
+
+
+### 1 - Instale as dependências
+
+Antes de começar, você precisa ter o Node.js instalado em seu sistema. Você pode baixar o [Node.js do site oficial](https://nodejs.org/en) e instalá-lo, seguindo as instruções do próprio site.   
+
+Depois comece criando um novo diretório para o seu projeto e inicializando um novo projeto npm dentro dele. Em seguida, instale o Express usando npm (Node Package Manager), que é o gerenciador de pacotes padrão para o Nodejs. Os comandos são:
+
+```bash
+mkdir my-api
+cd my-api
+npm init
+npm install express
+```
+
+
+### 2 - Iniciando a codificação
+
+Crie um arquivo **index.js**: Este será o principal ponto de entrada para sua API.  
+Abra um editor de texto e crie um novo arquivo chamado **index.js** dentro do diretório do seu projeto.  
+Import Express: Em seu arquivo **index.js**, comece importando o módulo Express:
+
+```javascript
+const express = require('express');
+```
+
+Crie uma instância do aplicativo Express: Crie uma nova instância do aplicativo Express chamando a função **express()**:
+
+```javascript
+const app = express();
+```
+
+Defina suas rotas: Express usa um sistema de roteamento para lidar com solicitações recebidas.  
+Você pode definir suas rotas usando o método **app.get()**:
+
+```javascript
+app.get('/', (req, res) => {
+  res.send('Hello, world!');
+});
+```
+Inicie o servidor: Por fim, inicie o servidor chamando o método **app.listen()** e passando o número da porta que deseja escutar:
+
+```javascript
+app.listen(3000, () => {
+  console.log('Server listening on port 3000');
+});
+```
+
+O arquivo index.js fica assim, até agora:
+
+```javascript
+const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => {
+  res.send('Hello, world!');
+});
+
+app.listen(3000, () => {
+  console.log('Server listening on port 3000');
+});
+```
+
+Salve o arquivo e inicie o servidor executando node index.js em seu terminal.  
+Você deverá ver a mensagem **"Server listening on port 3000"**.  
+
+Abra um navegador da web e navegue até http://localhost:3000 para ver a mensagem **"Hello, world!"**.
+
+
+### 3 - Melhorando o projeto com o pacote **CORS** para restringir a origem, **Morgan** para fatiar solicitações no console e **Helment** para segurança.
+
+Instale os pacotes: Instale os pacotes cors, morgan e helmet:
+
+```bash
+npm install cors morgan helmet
+```
+
+Atualize index.js: Em seu arquivo index.js, comece importando os novos pacotes necessários:
+
+```javascript
+const express = require('express'); 
+const cors = require('cors');
+const morgan = require('morgan');
+const helmet = require('helmet');
+```
+
+> Por padrão, o Express permite que qualquer origem acesse sua API. No entanto, em um ambiente de produção, você geralmente deseja restringir o acesso a origens específicas por razões de segurança. Você pode fazer isso usando o pacote CORS.
+
+Em seguida, adicione o middleware **CORS** ao seu código index.js:
+
+```javascript
+const app = express();
+
+// middlewares
+app.use(cors());
+
+// Restante do código
+});
+```
+
+** Nota: Este código adiciona o middleware **CORS** à sua aplicação, sem nenhum parâmetro, no modo default **All**, ou seja permitindo acesso de qualeur lugar.  
+Para restringir num projeto real, adicione um objeto ao cors e passe a origem como parâmetro:
+
+```javascript
+app.use(cors({
+  origin: 'http://example.com',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}));
+```
+
+Para saber mais vá a página do pacote: https://www.npmjs.com/package/cors  
+
+> Às vezes, é útil registrar todas as solicitações recebidas pela sua API em um arquivo de log ou no console. O pacote Morgan é uma opção popular para isso.  
+
+Adicione o middleware **Morgan** ao seu código index.js:
+
+```javascript
+const app = express();
+
+// middlewares
+app.use(cors());
+app.use(morgan('dev'));
+
+// Restante do código
+});
+```
+Este código adiciona o middleware Morgan à sua aplicação, registrando todas as solicitações no console.
+Para saber mais vá a página do pacote: https://www.npmjs.com/package/morgan
+
+> O pacote Helmet é uma coleção de pequenos middleware para ajudar a proteger sua aplicação Express de várias vulnerabilidades da web. Ele ajuda a definir vários cabeçalhos HTTP para aumentar a segurança da sua aplicação.  
+
+Adicione o middleware **Helmet** ao seu código index.js:
+
+```javascript
+const app = express();
+
+// middlewares
+app.use(cors());
+app.use(morgan('dev'));
+app.use(helmet());
+
+// Restante do código
+});
+```
+
+Este código adiciona o middleware Helmet à sua aplicação, protegendo-a de várias vulnerabilidades da web.
+Para saber mais vá a página do pacote: https://www.npmjs.com/package/helmet
+
+Aqui está o arquivo index.js completo, até agora:
+
+```javascript
+const express = require('express');
+const cors = require('cors');
+const morgan = require('morgan');
+const helmet = require('helmet');
+
+const app = express();
+
+app.use(cors(/* 
+              { origin: 'http://example.com',
+                optionsSuccessStatus: 200 } 
+             */));
+app.use(morgan('combined'));
+app.use(helmet());
+
+app.get('/', (req, res) => {
+  res.send('Hello, world!');
+});
+
+app.listen(3000, () => {
+  console.log('Server listening on port 3000');
+});
+```
+
+Salve o arquivo e inicie o servidor executando node index.js em seu terminal. Você deverá ver a mensagem "Server listening on port 3000".  
+Abra um navegador da web e navegue até http://localhost:3000 para ver a mensagem "Hello, world!".  
+
+Observe que com o middleware **Morgan**, você deverá ver os logs das solicitações feitas ao seu servidor em seu console.  
+Com o middleware do **Helmet**, você terá cabeçalhos de segurança adicionais adicionados às suas respostas para melhor proteção contra vulnerabilidades comuns da web.  
+E com o middleware **CORS**, você poderá restringir as origens que podem acessar sua API.
+
+
+
+
+
+
+
+
+
+
+
