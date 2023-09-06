@@ -13,12 +13,10 @@ Antes de começar, você precisa ter o Node.js instalado em seu sistema. Você p
 Depois comece criando um novo diretório para o seu projeto e inicializando um novo projeto npm dentro dele. Em seguida, instale o Express usando npm (Node Package Manager), que é o gerenciador de pacotes padrão para o Nodejs. Os comandos são:
 
 {% highlight bash %}
-```bash
 mkdir my-api
 cd my-api
 npm init
 npm install express
-```
 {% endhighlight %}
 
 
