@@ -17,7 +17,6 @@ mkdir my-api
 cd my-api
 npm init
 npm install express
-{% endhighlight %}
 ```
 
 
@@ -29,7 +28,6 @@ Import Express: Em seu arquivo **index.js**, comece importando o módulo Express
 
 ```js
 const express = require('express');
-{% endhighlight %}
 ```
 
 
@@ -37,7 +35,6 @@ Crie uma instância do aplicativo Express: Crie uma nova instância do aplicativ
 
 ```js
 const app = express();
-{% endhighlight %}
 ```
 
 Defina suas rotas: Express usa um sistema de roteamento para lidar com solicitações recebidas.  
