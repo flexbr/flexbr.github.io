@@ -12,12 +12,13 @@ Antes de começar, você precisa ter o Node.js instalado em seu sistema. Você p
 
 Depois comece criando um novo diretório para o seu projeto e inicializando um novo projeto npm dentro dele. Em seguida, instale o Express usando npm (Node Package Manager), que é o gerenciador de pacotes padrão para o Nodejs. Os comandos são:
 
-{% highlight bash %}
+```bash
 mkdir my-api
 cd my-api
 npm init
 npm install express
 {% endhighlight %}
+```
 
 
 ### 2 - Iniciando a codificação
@@ -26,26 +27,27 @@ Crie um arquivo **index.js**: Este será o principal ponto de entrada para sua A
 Abra um editor de texto e crie um novo arquivo chamado **index.js** dentro do diretório do seu projeto.  
 Import Express: Em seu arquivo **index.js**, comece importando o módulo Express:
 
-{% highlight js %}
+```js
 const express = require('express');
 {% endhighlight %}
+```
 
 
 Crie uma instância do aplicativo Express: Crie uma nova instância do aplicativo Express chamando a função **express()**:
 
-{% highlight js %}
+```js
 const app = express();
 {% endhighlight %}
-
+```
 
 Defina suas rotas: Express usa um sistema de roteamento para lidar com solicitações recebidas.  
 Você pode definir suas rotas usando o método **app.get()**:
 
-{% highlight js %}
+```js
 app.get('/', (req, res) => {
   res.send('Hello, world!');
 });
-{% endhighlight %}
+```
 
 
 Inicie o servidor: Por fim, inicie o servidor chamando o método **app.listen()** e passando o número da porta que deseja escutar:
