@@ -55,6 +55,10 @@
       </footer>
     </div>
     <script src="{{ '/assets/js/scale.fix.js' | relative_url }}"></script>
+    <!-- highlight js -->
+    <script src="/assets/highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <!-- end highlight -->
     {% if site.google_analytics %}
       <script>
           (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -65,9 +69,5 @@
           ga('send', 'pageview');
       </script>
     {% endif %}
-    <!-- highlight js -->
-    <script src="/assets/highlight/highlight.min.js"></script>
-    <script>hljs.highlightAll();</script>
-    <!-- end highlight -->
   </body>
 </html>
