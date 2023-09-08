@@ -1,14 +1,14 @@
 # API Simples com NodeJs e Express
 ### Como criar uma API simples em NodeJs com Express 
 
-> O Node.js é uma plataforma que permite que você desenvolva aplicativos de rede escaláveis.  
- O Express é um framework popular para Node.js que permite criar aplicativos da web com facilidade.   
- Neste tutorial, mostraremos como criar uma API simples em Node.js com o Express. 
+> O **Nodejs** é uma plataforma que permite que você desenvolva aplicativos de rede escaláveis.  
+ O **Express** é um framework muito popular para **Nodejs** que permite criar aplicativos da web com facilidade.   
+ Neste tutorial, mostraremos como criar uma API simples em Nodejs com o Express. 
 
 
-### 1 - Instale as dependências
+### 1 - Início do projeto, instalação das dependências e configurações iniciais.
 
-Antes de começar, você precisa ter o Node.js instalado em seu sistema. Você pode baixar o [Node.js do site oficial](https://nodejs.org/en) e instalá-lo, seguindo as instruções do próprio site.   
+Antes de começar, você precisa ter o Nodejs instalado em seu sistema. Você pode baixar o [Nodejs do site oficial](https://nodejs.org/en) e instalá-lo, seguindo as instruções do próprio site.   
 
 Depois comece criando um novo diretório para o seu projeto e inicializando um novo projeto npm dentro dele. Em seguida, instale o Express usando npm (Node Package Manager), que é o gerenciador de pacotes padrão para o Nodejs. Os comandos são:
 
@@ -16,69 +16,142 @@ Depois comece criando um novo diretório para o seu projeto e inicializando um n
 mkdir my-api
 cd my-api
 npm init
+```
+>O NPM Init, vai fazer perguntas:   
+package name: (nodeexpressapi) **node_express_api**  
+version: (1.0.0) **[de enter]**  
+description: **Simple API with NodeJs and Express**  
+entry point: (index.js) **[de enter]**    
+test command: **[de enter]**   
+git repository: **[de enter]**    
+keywords: **[de enter]**    
+author: **[caso queira entre com seu apelido]**  
+license: (ISC) **MIT** [ou outra licença que achar adequado]
+
+Confirme com **yes** e em seguida instale o **Express**:
+
+```bash
 npm install express
 ```
 
+Crie um arquivo **index.js** na pasta do seu projeto. Este será o principal ponto de entrada para sua API.  
+
+O comando **npm init** usado anteriormente gerou um aquivo chamado **package.json**.  
+Edite ele, e adicione a a execução do **index.js** pelo Node na linha após de "test"..., não esquecendo de adicionar a vírgula no final da linha do test:  
+Adicione: **"start": "node index.js"**
+```json
+"test": "echo \"Error: no test specified\" && exit 1",
+"start": "node index.js"
+```
+
+O arquivo de configuração completo fica similar a:
+
+```json
+{
+  "name": "node_express_api",
+  "version": "1.0.0",
+  "description": "Simple API with NodeJs and Express",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "rramires",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
+```
+
+No arquivo **index.js** adicione:
+
+```js
+console.log("Hello World!");
+```
+
+Execute o seu projeto, no terminal:  
+
+```bash
+npm start 
+```
+
+Se estiver tudo OK, vai imprimir na tela:  
+**Hello World!**
 
 ### 2 - Iniciando a codificação
-
-Crie um arquivo **index.js**: Este será o principal ponto de entrada para sua API.  
-Abra um editor de texto e crie um novo arquivo chamado **index.js** dentro do diretório do seu projeto.  
-Import Express: Em seu arquivo **index.js**, comece importando o módulo Express:
+Apague a linha do **console.log** no arquivo **index.js** e importe o Express:
 
 ```js
 const express = require('express');
 ```
 
-
-Crie uma instância do aplicativo Express: Crie uma nova instância do aplicativo Express chamando a função **express()**:
+Crie uma nova instância da aplicação **Express** chamando a função **express()**:
 
 ```js
 const app = express();
 ```
 
-Defina suas rotas: Express usa um sistema de roteamento para lidar com solicitações recebidas.  
-Você pode definir suas rotas usando o método **app.get()**:
+O **Express** usa um sistema de roteamento para lidar com solicitações recebidas.  
+Você pode definir suas rotas usando o método **app.get()**.  
+Adicione:
 
 ```js
 app.get('/', (req, res) => {
-  res.send('Hello, world!');
+    res.send('Hello World!');
 });
 ```
 
-
-Inicie o servidor: Por fim, inicie o servidor chamando o método **app.listen()** e passando o número da porta que deseja escutar:
+Por fim, inicie o servidor chamando o método **app.listen()** e passando o número da porta que deseja que ele fique escutando:
 
 ```js
 app.listen(3000, () => {
-  console.log('Server listening on port 3000');
+    console.log('Server listening on port 3000');
 });
 ```
 
-O arquivo index.js fica assim, até agora:
+O arquivo **index.js** fica assim, até agora:
 
 ```js
 const express = require('express');
+
 const app = express();
 
 app.get('/', (req, res) => {
-  res.send('Hello, world!');
+    res.send('Hello World!');
 });
 
 app.listen(3000, () => {
-  console.log('Server listening on port 3000');
+    console.log('Server listening on port 3000');
 });
 ```
 
-Salve o arquivo e inicie o servidor executando node index.js em seu terminal.  
+Salve o arquivo e inicie o servidor executando o comando em seu terminal:
+
+```bash
+npm start
+```
+
 Você deverá ver a mensagem **"Server listening on port 3000"**.  
 
-Abra um navegador da web e navegue até http://localhost:3000 para ver a mensagem **"Hello, world!"**.
+Abra um navegador da web e navegue até http://localhost:3000 para ver a mensagem **"Hello, world!"** impressa na página do seu navegador.
 
+De um **control+c** no terminal para parar o servidor:
+```bash
+...
+Server listening on port 3000
+^C
+volta para o prompt normal:
+>
+```
 
-### 3 - Melhorando o projeto com o pacote **CORS** para restringir a origem, **Morgan** para fatiar solicitações no console e **Helmet** para segurança.
+>O cógigo fonte desse projeto encontra-se em: 
+[https://github.com/rramires/articles/tree/master/NodeExpressAPI](https://github.com/rramires/articles/tree/master/NodeExpressAPI)  
+Até essa parte, o comit é: **API NodeExpress parte 1**  
+Hash: 9df61de0e2e3a82f18829de850fed5c4554ae588
 
-Instale os pacotes: Instale os pacotes cors, morgan e helmet:
+### 3 - Melhorando o projeto com o pacote **CORS** para restringir a origem, **Morgan** para "fatiar" as solicitações no console e **Helmet** para segurança.
+
+Instale os pacotes **Cors, Morgan e Helmet**:
 
 ```bash
 npm install cors morgan helmet
@@ -408,5 +481,5 @@ app.listen(3000, () => {
 * **PUT /products/:id:** Atualiza um produto existente na lista.
 * **DELETE /products/:id:** Exclui um produto existente da lista.
 
->Agora você tem uma API Node.js simples em funcionamento com o Express. A partir daqui, você pode adicionar mais rotas, manipular solicitações POST, integrar bancos de dados e expandir sua API conforme necessário. 
+>Agora você tem uma API Nodejs simples em funcionamento com o Express. A partir daqui, você pode adicionar mais rotas, manipular solicitações POST, integrar bancos de dados e expandir sua API conforme necessário. 
 O Express oferece uma variedade de recursos poderosos para desenvolvimento web, e você pode explorar mais recursos na documentação oficial: [https://expressjs.com](https://expressjs.com/)
