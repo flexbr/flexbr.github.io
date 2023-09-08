@@ -18,7 +18,7 @@ Para criar, basta utilizar de uma a seis cerquilha(s) antes do texto
 ##### Titulo 5
 ###### Titulo 6
 
-```markdown
+```md
 # Titulo 1
 ## Titulo 2
 ### Titulo 3
