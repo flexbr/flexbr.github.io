@@ -17,7 +17,7 @@ mkdir my-api
 cd my-api
 npm init
 ```
->O NPM Init, vai fazer perguntas:   
+>**O NPM Init, vai fazer perguntas:**  
 package name: (nodeexpressapi) **node_express_api**  
 version: (1.0.0) **[de enter]**  
 description: **Simple API with NodeJs and Express**  
@@ -34,7 +34,14 @@ Confirme com **yes** e em seguida instale o **Express**:
 npm install express
 ```
 
-Crie um arquivo **index.js** na pasta do seu projeto. Este será o principal ponto de entrada para sua API.  
+Se estiver usando o **Git**, crie um aquivo chamado **.gitignore** (inicia com ponto + gitignore) na raiz do seu projeto e nele adicione o nome da pasta onde os módulos do **Nodejs** foram instalados.  
+Isso faz com que eles sejam ignorados pelo **Git** e consequentemente não subam para o **GitHub**.  
+Adicione:
+```bash
+node_modules
+```
+
+Crie um arquivo **index.js** na pasta do seu projeto. Este será o principal ponto de entrada para sua **API**.  
 
 O comando **npm init** usado anteriormente gerou um aquivo chamado **package.json**.  
 Edite ele, e adicione a a execução do **index.js** pelo Node na linha após de "test"..., não esquecendo de adicionar a vírgula no final da linha do test:  
@@ -53,7 +60,8 @@ O arquivo de configuração completo fica similar a:
   "description": "Simple API with NodeJs and Express",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "author": "rramires",
   "license": "MIT",
@@ -78,8 +86,9 @@ npm start
 Se estiver tudo OK, vai imprimir na tela:  
 **Hello World!**
 
+
 ### 2 - Iniciando a codificação
-Apague a linha do **console.log** no arquivo **index.js** e importe o Express:
+Apague a linha do **console.log** no arquivo **index.js** e importe o **Express**:
 
 ```js
 const express = require('express');
@@ -101,7 +110,7 @@ app.get('/', (req, res) => {
 });
 ```
 
-Por fim, inicie o servidor chamando o método **app.listen()** e passando o número da porta que deseja que ele fique escutando:
+Por fim, inicie o servidor chamando o método **app.listen()** e passando o número da porta que deseja que ele fique escutando, no nosso caso, usaremos a **3000**:
 
 ```js
 app.listen(3000, () => {
@@ -131,11 +140,19 @@ Salve o arquivo e inicie o servidor executando o comando em seu terminal:
 npm start
 ```
 
-Você deverá ver a mensagem **"Server listening on port 3000"**.  
+Você deverá ver a mensagem no terminal: **"Server listening on port 3000"**.  
 
-Abra um navegador da web e navegue até http://localhost:3000 para ver a mensagem **"Hello, world!"** impressa na página do seu navegador.
+Abra um navegador da web e navegue até **http://localhost:3000**  
+A mensagem **"Hello, world!"** deverá ser impressa na página do seu navegador.
 
-De um **control+c** no terminal para parar o servidor:
+
+>Parabéns! Objetivos atingidos até aqui:
+> * Criamos um novo projeto em **NodeJs**
+> * Concluímos as configurações iniciais
+> * Adicionamos o **Express** e iniciamos um servidor na porta **3000**
+> * Configuramos e criamos e testamos a primeira rota que responde a chamadas via URL: **http://localhost:3000**
+
+De um **control+c** no terminal para parar a execução do servidor:
 ```bash
 ...
 Server listening on port 3000
@@ -143,11 +160,10 @@ Server listening on port 3000
 volta para o prompt normal:
 >
 ```
-
 >O cógigo fonte desse projeto encontra-se em: 
 [https://github.com/rramires/articles/tree/master/NodeExpressAPI](https://github.com/rramires/articles/tree/master/NodeExpressAPI)  
-Até essa parte, o comit é: **API NodeExpress parte 1**  
-Hash: 9df61de0e2e3a82f18829de850fed5c4554ae588
+Até essa parte, o comit é: **API NodeExpress parte 1 fix 2**  
+Hash: acf3352524a416dd7598d4e2b915d8cdf5648aab
 
 ### 3 - Melhorando o projeto com o pacote **CORS** para restringir a origem, **Morgan** para "fatiar" as solicitações no console e **Helmet** para segurança.
 
