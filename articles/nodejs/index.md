@@ -110,7 +110,7 @@ app.get('/', (req, res) => {
 });
 ```
 
-Por fim, inicie o servidor chamando o método **app.listen()** e passando o número da porta que deseja que ele fique escutando, no nosso caso, usaremos a **3000**:
+Por fim, inicie o servidor chamando o método **app.listen()** e passando o número da porta que deseja que ele fique escutando. No nosso caso, usaremos a **3000**:
 
 ```js
 app.listen(3000, () => {
@@ -150,7 +150,8 @@ A mensagem **"Hello, world!"** deverá ser impressa na página do seu navegador.
 > * Criamos um novo projeto em **NodeJs**
 > * Concluímos as configurações iniciais
 > * Adicionamos o **Express** e iniciamos um servidor na porta **3000**
-> * Configuramos e criamos e testamos a primeira rota que responde a chamadas via URL: **http://localhost:3000**
+> * Criamos e testamos a primeira rota que responde a chamadas via URL: **http://localhost:3000**
+
 
 De um **control+c** no terminal para parar a execução do servidor:
 ```bash
@@ -173,7 +174,7 @@ Instale os pacotes **Cors, Morgan e Helmet**:
 npm install cors morgan helmet
 ```
 
-Atualize index.js: Em seu arquivo index.js, comece importando os novos pacotes necessários:
+No início do seu arquivo **index.js**, importe os novos pacotes necessários:
 
 ```js
 const express = require('express'); 
@@ -182,7 +183,7 @@ const morgan = require('morgan');
 const helmet = require('helmet');
 ```
 
-> Por padrão, o Express permite que qualquer origem acesse sua API. No entanto, em um ambiente de produção, você geralmente deseja restringir o acesso a origens específicas por razões de segurança. Você pode fazer isso usando o pacote CORS.
+> Por padrão, o Express permite que de qualquer origem acesse sua API. No entanto, em um ambiente de produção, você geralmente deseja restringir o acesso a origens específicas por razões de segurança. Você pode fazer isso usando o pacote CORS.
 
 Em seguida, adicione o middleware **CORS** ao seu código index.js:
 
@@ -196,7 +197,7 @@ app.use(cors());
 });
 ```
 
-** Nota: Este código adiciona o middleware **CORS** à sua aplicação, sem nenhum parâmetro, no modo default **All**, ou seja permitindo acesso de qualeur lugar.  
+**Nota**: Este código adiciona o middleware **CORS** à sua aplicação, sem nenhum parâmetro, no modo default **All**, ou seja permitindo acesso de qualeur lugar.  
 Para restringir num projeto real, adicione um objeto ao cors e passe a origem como parâmetro:
 
 ```js
@@ -208,7 +209,7 @@ app.use(cors({
 
 Para saber mais vá a página do pacote: [https://www.npmjs.com/package/cors](https://www.npmjs.com/package/cors)  
 
-> Às vezes, é útil registrar todas as solicitações recebidas pela sua API em um arquivo de log ou no console. O pacote Morgan é uma opção popular para isso.  
+> Às vezes, é útil registrar todas as solicitações recebidas pela sua API em um arquivo de log ou no console. O pacote Morgan é uma opção muito popular para isso.  
 
 Adicione o middleware **Morgan** ao seu código index.js:
 
@@ -222,10 +223,10 @@ app.use(morgan('dev'));
 // Restante do código
 });
 ```
-Este código adiciona o middleware Morgan à sua aplicação, registrando todas as solicitações no console.
+Este código adiciona o middleware Morgan à sua aplicação, registrando todas as solicitações no console. Isso ajuda na etapa de desenvolvimento na visualização das chamadas ao servidor. 
 Para saber mais vá a página do pacote: [https://www.npmjs.com/package/morgan](https://www.npmjs.com/package/morgan)
 
-> O pacote Helmet é uma coleção de pequenos middleware para ajudar a proteger sua aplicação Express de várias vulnerabilidades da web. Ele ajuda a definir vários cabeçalhos HTTP para aumentar a segurança da sua aplicação.  
+> O pacote Helmet é uma coleção de middlewares, para ajudar a proteger sua aplicação Express de várias vulnerabilidades da web. Ele ajuda a definir vários cabeçalhos HTTP para aumentar a segurança da sua aplicação.  
 
 Adicione o middleware **Helmet** ao seu código index.js:
 
@@ -254,11 +255,12 @@ const helmet = require('helmet');
 
 const app = express();
 
+// middlewares
 app.use(cors(/* 
               { origin: 'http://example.com',
                 optionsSuccessStatus: 200 } 
              */));
-app.use(morgan('combined'));
+app.use(morgan('dev'));
 app.use(helmet());
 
 app.get('/', (req, res) => {
@@ -270,12 +272,16 @@ app.listen(3000, () => {
 });
 ```
 
-Salve o arquivo e inicie o servidor executando node index.js em seu terminal. Você deverá ver a mensagem "Server listening on port 3000".  
-Abra um navegador da web e navegue até http://localhost:3000 para ver a mensagem "Hello, world!".  
+Salve o arquivo e inicie o servidor executando **"npm start"** em seu terminal. Você deverá ver a mensagem **"Server listening on port 3000".**  
+Abra um navegador da web e navegue até **http://localhost:3000** para ver a mensagem **"Hello, world!".**  
 
-Observe que com o middleware **Morgan**, você deverá ver os logs das solicitações feitas ao seu servidor em seu console.  
-Com o middleware do **Helmet**, você terá cabeçalhos de segurança adicionais adicionados às suas respostas para melhor proteção contra vulnerabilidades comuns da web.  
-E com o middleware **CORS**, você poderá restringir as origens que podem acessar sua API.
+>**O que mudou:**  
+> * Observe que com o middleware **Morgan**, você deverá ver os logs das solicitações feitas ao seu servidor em seu console. Onde está a opção **dev**, experimente trocar por **combined** ou outras opções que você acha na página do pacote
+> * Apesar de não ver nenhuma indicação visual com o middleware **Helmet**, você terá cabeçalhos de segurança adicionais adicionados às suas respostas para melhor proteção contra vulnerabilidades comuns da web. Sua aplicação agora está mais segura!  
+> * E com o middleware **CORS**, você poderá restringir as origens que podem acessar sua API. Descomentando o objeto onde está **(origin: 'http://seusite.abc')** e configurando com as únicas origens corretas, quando estiver em produção.
+
+>Até essa parte, o comit é: **API NodeExpress add Cors, Morgan e Helmet**  
+Hash: 15dc1a42b3a7459f2b68bd1415850e205acfe03f
 
 
 ### 4 - Adicionando operações CRUD
