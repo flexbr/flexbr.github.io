@@ -8,9 +8,9 @@
 
 ### 1 - Início do projeto, instalação das dependências e configurações iniciais.
 
-Antes de começar, você precisa ter o Nodejs instalado em seu sistema. Você pode baixar o [Nodejs do site oficial](https://nodejs.org/en) e instalá-lo, seguindo as instruções do próprio site.   
+Antes de começar, você precisa ter o **Nodejs** instalado em seu sistema. Você pode baixar o [Nodejs do site oficial](https://nodejs.org/en) e instalá-lo, seguindo as instruções do próprio site.   
 
-Depois comece criando um novo diretório para o seu projeto e inicializando um novo projeto npm dentro dele. Em seguida, instale o Express usando npm (Node Package Manager), que é o gerenciador de pacotes padrão para o Nodejs. Os comandos são:
+Depois comece criando um novo diretório para o seu projeto e inicializando um novo projeto com o **npm**(Node Package Manager, gerenciador de pacotes padrão para o Nodejs) dentro dele. Em seguida, instale o Express usando **npm**. Os comandos são:
 
 ```bash
 mkdir my-api
@@ -597,3 +597,5 @@ Caso não tenha, basta criar uma conta gratuíta.
 
 >Esse foi um exemplo simples para inicar. Agora você tem uma API Nodejs em funcionamento com o Express. A partir daqui, você pode adicionar mais rotas, manipular solicitações POST, integrar bancos de dados e expandir sua API conforme necessário. 
 O **Express** oferece uma variedade de recursos poderosos para desenvolvimento web, e você pode explorar mais recursos na documentação oficial: [https://expressjs.com](https://expressjs.com/)
+Até essa parte, o commit é: **API NodeExpress final**  
+Hash: fe1fd04c46b2b928261d2a3c454024f467e8b614
