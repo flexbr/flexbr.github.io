@@ -163,7 +163,7 @@ volta para o prompt normal:
 ```
 >O cógigo fonte desse projeto encontra-se em: 
 [https://github.com/rramires/articles/tree/master/NodeExpressAPI](https://github.com/rramires/articles/tree/master/NodeExpressAPI)  
-Até essa parte, o comit é: **API NodeExpress parte 1 fix 2**  
+Até essa parte, o commit é: **API NodeExpress parte 1 fix 2**  
 Hash: acf3352524a416dd7598d4e2b915d8cdf5648aab
 
 ### 3 - Melhorando o projeto com o pacote **CORS** para restringir a origem, **Morgan** para "fatiar" as solicitações no console e **Helmet** para segurança.
@@ -280,7 +280,7 @@ Abra um navegador da web e navegue até **http://localhost:3000** para ver a men
 > * Apesar de não ver nenhuma indicação visual com o middleware **Helmet**, você terá cabeçalhos de segurança adicionais adicionados às suas respostas para melhor proteção contra vulnerabilidades comuns da web. Sua aplicação agora está mais segura!  
 > * E com o middleware **CORS**, você poderá restringir as origens que podem acessar sua API. Descomentando o objeto onde está **(origin: 'http://seusite.abc')** e configurando com as únicas origens corretas, quando estiver em produção.
 
->Até essa parte, o comit é: **API NodeExpress add Cors, Morgan e Helmet**  
+>Até essa parte, o commit é: **API NodeExpress add Cors, Morgan e Helmet**  
 Hash: 15dc1a42b3a7459f2b68bd1415850e205acfe03f
 
 
@@ -289,9 +289,12 @@ Hash: 15dc1a42b3a7459f2b68bd1415850e205acfe03f
 >Agora que você criou uma API básica, vamos incrementar adicionando operações CRUD (Criar, Ler, Atualizar, Excluir) para manipular dados.  
 Nesse exemplo para ficar mais simples(sem envolver um banco de dados), vamos criar um array de produtos e criar rotas para consultar, inserir, atualizar e excluir produtos.
 
-Adicione o seguinte código no topo do seu arquivo index.js para definir o array de produtos:
+Adicione o array de produtos no início do seu arquivo **index.js**, logo após a importação dos pacotes:
 
 ```js
+/**
+ * Products array
+ */
 const products = [
   { id: 1, name: 'Product 1', price: 10.99 },
   { id: 2, name: 'Product 2', price: 9.99 },
@@ -299,53 +302,108 @@ const products = [
 ];
 ```
 
-Defina uma rota que retorne a matriz de produtos quando uma solicitação **GET** for feita ao endpoint **/products**
+Adicione um novo middleware para fazer o parser de conteúdo JSON, logo após o **Helmet**:
+
+```js
+app.use(express.json());
+```
+
+Apague a rota do **Hello world** e em seu lugar, e defina uma rota que todo o array de produtos quando uma requisição **GET** for feita ao endpoint **/products**.
 
 ```js
 /**
  * Return all products
  */
 app.get('/products', (req, res) => {
-  // return
+  // return 200 OK + products array
   res.json(products);
 });
 ```
 
-Defina uma rota que retorne um produto quando uma solicitação **GET** for feita ao endpoint **/products/:id**
+Inicie a aplicação, abra o navegador e vá até **http://localhost:3000/products** para ver o array de produtos, retornando em formato **JSON**.
+
+Depois defina uma rota para retornar um produto pelo **id** quando uma requisição **GET** for feita ao endpoint **/products/:id**
 
 ```js
-app.get('products/:id', (req, res) => {
+/**
+ * Return product by id
+ */
+app.get('/products/:id', (req, res) => {
   // get param
   const id = parseInt(req.params.id);
   // find
   const product = products.find(p => p.id === id);
   // if found
   if(product){
+    // return 200 OK + product
     res.json(product);
   } 
-  else{ // if not found
+  else{ 
+    // return 404 Not Found + message
     res.status(404).json({ message: 'Product not found.' });
   }
 });
 ```
 
-Defina uma rota que adicione um novo produto à matriz de produtos quando uma solicitação **POST** for feita ao endpoint **/products**
+Inicie a aplicação novamente, vá até **http://localhost:3000/products/1** para ver um produto específico. Troque o número final **1** por 2 ou três e observe que o produto mudou. Coloque um número que não existe, ex: **4** e perceba que retorna o erro **404**, com a mensagem **Product not found**.
+
+
+Antes de fazermos as rotas de inserção e exclusão, perceba que fica chato ficar iniciando a aplicação com o **npm start** e parando com o "ctrl+c" toda vez que faz uma modificação.
+Para melhorar isso, vamos instalar mais um pacote, o **Nodemon**(Node Monitor) e configurá-lo. Com isso, iniciando o projeto com ele, cada vez que for salvo qualquer arquivo na aplicação, ela reinicia automaticamente.
+Instale o **Nodemon**, no modo desenvolvedor:
+
+```bash
+npm install --save-dev nodemon
+```
+
+Após a instalação adicione o novo comando de execução no arquivo de configuração **package.json** depois da linha do **"start"**, não esquecendo da vírgula no final da linha anterior:
+
+```json
+"dev": "nodemon index.js" 
+
+// Fica assim essa parte:
+"scripts": {
+  "test": "echo \"Error: no test specified\" && exit 1",
+  "start": "node index.js", 
+  "dev": "nodemon index.js" 
+}
+```
+>A partir de agora, inicie sua aplicação no terminal com o comando:  
+**npm run dev**  
+Quando salvar o arquivo, **index.js** perceba que a aplicação reinicia automaticamente, executando a versão mais nova do código. Experimente dar **ctrl+s** para salvar mesmo sem modificar nada, e perceba na janela do terminal a cada vez:  
+
+```bash  
+[nodemon] restarting due to changes...  
+[nodemon] starting `node index.js`  
+Server listening on port 3000  
+```
+
+Continuando com as rotas. Vamos precisar de uma variável auxiliar para servir de auto-incremento para o id dos produtos. Para isso adicione logo após o array de produtos:
+
+```js
+/**
+ * Aux to create incremental product ID
+ */
+let idCounter = products.length; 
+```
+
+Defina uma rota que adicione um novo produto ao array de produtos quando uma requisição **POST** for feita ao endpoint **/products**
 
 ```js
 /**
  * Insert new product
  */
 app.post('/products', (req, res) => {
-  // define new product
-  const newProduct = { id: products.length + 1, ...req.body };
+  // create a new product 
+  const newProduct = { id: ++idCounter, ...req.body };
   // add to array
   products.push(newProduct);
-  // return
-  res.json(newProduct);
+  // return 201 Created + product 
+  res.status(201).json(newProduct);
 });
 ```
 
-Defina uma rota que atualize um produto existente no array de produtos quando uma solicitação **PUT** for feita para o endpoint **/products/:id** 
+Defina uma rota que atualize um produto existente no array de produtos quando uma requisição **PUT** for feita para o endpoint **/products/:id** 
 
 ```js
 /**
@@ -355,19 +413,23 @@ app.put('/products/:id', (req, res) => {
   // get params
   const productId = parseInt(req.params.id);
   const updatedProduct = req.body;
-  // find and update
-  products = products.map(product => {
-    if(product.id === productId) {
-      return { ...product, ...updatedProduct };
-    }
-    return product;
-  });
-  // return
-  res.json(products.find(product => product.id === productId));
+  // find product index
+  const index = products.findIndex(product => product.id === productId);
+  // if not found
+  if(index === -1){
+    // return 404 Not Found + message
+    res.status(404).json({ message: 'Product not found.' });
+  }
+  else{
+    // updates the product using destructuring assignment
+    products[index] = { ...products[index], ...updatedProduct };
+    // return 200 OK + product
+    res.json(products[index]);
+  }
 });
 ```
 
-Defina uma rota que exclua um produto existente no array de produtos quando uma solicitação **DELETE** for feita para **/products/:id**
+Defina uma rota que exclua um produto existente no array de produtos quando uma requisição **DELETE** for feita para **/products/:id**
 
 ```js
 /**
@@ -376,16 +438,22 @@ Defina uma rota que exclua um produto existente no array de produtos quando uma 
 app.delete('/products/:id', (req, res) => {
   // get param
   const productId = parseInt(req.params.id);
-  // find
-  const deletedProduct = products.find(product => product.id === productId);
-  // delete
-  products = products.filter(product => product.id !== productId);
-  // return
-  res.json(deletedProduct);
+  // find product index
+  const index = products.findIndex(product => product.id === productId);
+  if(index === -1){
+    // return 404 Not Found + message
+    res.status(404).json({ message: 'Product not found.' });
+  }
+  else{
+    // delete
+    products.splice(index, 1);
+    // return 200 OK + product ID
+    res.json({ id: productId });
+  }
 });
 ```
 
-Fica assim arquivo index.js completo, até agora:
+Fica assim arquivo **index.js** completo, até agora:
 
 ```js
 const express = require('express');
@@ -403,6 +471,11 @@ const products = [
 ];
 
 /**
+ * Aux to create incremental product ID
+ */
+let idCounter = products.length; // starts with value 3 
+
+/**
  * Express App instance
  */
 const app = express();
@@ -410,8 +483,11 @@ const app = express();
 
 /* --------- Middlewares --------- */
 
-app.use(cors());
-app.use(morgan('combined'));
+app.use(cors(/* 
+              { origin: 'http://site.abc',
+                optionsSuccessStatus: 200 } 
+             */));
+app.use(morgan('dev'));
 app.use(helmet());
 app.use(express.json());
 
@@ -422,23 +498,25 @@ app.use(express.json());
  * Return all products
  */
 app.get('/products', (req, res) => {
-  // return
+  // return 200 OK + products array
   res.json(products);
 });
 
 /**
  * Return product by id
  */
-app.get('products/:id', (req, res) => {
+app.get('/products/:id', (req, res) => {
   // get param
   const id = parseInt(req.params.id);
   // find
   const product = products.find(p => p.id === id);
   // if found
   if(product){
+    // return 200 OK + product
     res.json(product);
   } 
-  else{ // if not found
+  else{ 
+    // return 404 Not Found + message
     res.status(404).json({ message: 'Product not found.' });
   }
 });
@@ -447,12 +525,12 @@ app.get('products/:id', (req, res) => {
  * Insert new product
  */
 app.post('/products', (req, res) => {
-  // define new product
-  const newProduct = { id: products.length + 1, ...req.body };
+  // create a new product (++ before, first increments then recovers the value)
+  const newProduct = { id: ++idCounter, ...req.body };
   // add to array
   products.push(newProduct);
-  // return
-  res.json(newProduct);
+  // return 201 Created + product 
+  res.status(201).json(newProduct);
 });
 
 /**
@@ -462,15 +540,19 @@ app.put('/products/:id', (req, res) => {
   // get params
   const productId = parseInt(req.params.id);
   const updatedProduct = req.body;
-  // find and update
-  products = products.map(product => {
-    if(product.id === productId) {
-      return { ...product, ...updatedProduct };
-    }
-    return product;
-  });
-  // return
-  res.json(products.find(product => product.id === productId));
+  // find product index
+  const index = products.findIndex(product => product.id === productId);
+  // if not found
+  if(index === -1){
+    // return 404 Not Found + message
+    res.status(404).json({ message: 'Product not found.' });
+  }
+  else{
+    // updates the product using destructuring assignment
+    products[index] = { ...products[index], ...updatedProduct };
+    // return 200 OK + product
+    res.json(products[index]);
+  }
 });
 
 /**
@@ -479,19 +561,25 @@ app.put('/products/:id', (req, res) => {
 app.delete('/products/:id', (req, res) => {
   // get param
   const productId = parseInt(req.params.id);
-  // find
-  const deletedProduct = products.find(product => product.id === productId);
-  // delete
-  products = products.filter(product => product.id !== productId);
-  // return
-  res.json(deletedProduct);
+  // find product index
+  const index = products.findIndex(product => product.id === productId);
+  if(index === -1){
+    // return 404 Not Found + message
+    res.status(404).json({ message: 'Product not found.' });
+  }
+  else{
+    // delete
+    products.splice(index, 1);
+    // return 200 OK + product ID
+    res.json({ id: productId });
+  }
 });
 
 
 /* --------- App start --------- */
 
 app.listen(3000, () => {
-  console.log('Server started on port 3000');
+  console.log('Server listening on port 3000');
 });
 ```
 
@@ -503,5 +591,9 @@ app.listen(3000, () => {
 * **PUT /products/:id:** Atualiza um produto existente na lista.
 * **DELETE /products/:id:** Exclui um produto existente da lista.
 
->Agora você tem uma API Nodejs simples em funcionamento com o Express. A partir daqui, você pode adicionar mais rotas, manipular solicitações POST, integrar bancos de dados e expandir sua API conforme necessário. 
-O Express oferece uma variedade de recursos poderosos para desenvolvimento web, e você pode explorar mais recursos na documentação oficial: [https://expressjs.com](https://expressjs.com/)
+Para testar as rotas **POST, PUT e DELETE** utilize a coleção desse artigo no Postman:
+[https://www.postman.com/rramires/workspace/rramires-public/request/6767252-f4c683e9-c939-4e47-87b4-85d619bce6b1](https://www.postman.com/https://www.postman.com/rramires/workspace/rramires-public/request/6767252-f4c683e9-c939-4e47-87b4-85d619bce6b1)  
+Caso não tenha, basta criar uma conta gratuíta.
+
+>Esse foi um exemplo simples para inicar. Agora você tem uma API Nodejs em funcionamento com o Express. A partir daqui, você pode adicionar mais rotas, manipular solicitações POST, integrar bancos de dados e expandir sua API conforme necessário. 
+O **Express** oferece uma variedade de recursos poderosos para desenvolvimento web, e você pode explorar mais recursos na documentação oficial: [https://expressjs.com](https://expressjs.com/)
