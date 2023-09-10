@@ -592,10 +592,10 @@ app.listen(3000, () => {
 * **DELETE /products/:id:** Exclui um produto existente da lista.
 
 Para testar as rotas **POST, PUT e DELETE** utilize a coleção desse artigo no Postman:
-[https://www.postman.com/rramires/workspace/rramires-public/request/6767252-f4c683e9-c939-4e47-87b4-85d619bce6b1](https://www.postman.com/https://www.postman.com/rramires/workspace/rramires-public/request/6767252-f4c683e9-c939-4e47-87b4-85d619bce6b1)  
+[https://www.postman.com/rramires/workspace/rramires-public/collection/6767252-fc6dddd2-cd1f-47ba-8e64-64a6da71463b?action=share&creator=6767252](https://www.postman.com/rramires/workspace/rramires-public/collection/6767252-fc6dddd2-cd1f-47ba-8e64-64a6da71463b?action=share&creator=6767252)  
 Caso não tenha, basta criar uma conta gratuíta.
 
 >Esse foi um exemplo simples para inicar. Agora você tem uma API Nodejs em funcionamento com o Express. A partir daqui, você pode adicionar mais rotas, manipular solicitações POST, integrar bancos de dados e expandir sua API conforme necessário. 
-O **Express** oferece uma variedade de recursos poderosos para desenvolvimento web, e você pode explorar mais recursos na documentação oficial: [https://expressjs.com](https://expressjs.com/)
+O **Express** oferece uma variedade de recursos poderosos para desenvolvimento web, e você pode explorar mais recursos na documentação oficial: [https://expressjs.com](https://expressjs.com/)  
 Até essa parte, o commit é: **API NodeExpress final**  
 Hash: fe1fd04c46b2b928261d2a3c454024f467e8b614
